@@ -31,8 +31,6 @@ router.put('/updatealiment/:id_alimentos', reqAnimalesController.updateReqAnimal
 router.delete('/deletealiment/:id_alimentos', reqAnimalesController.deleteRqAnimal)
 
 
-
-
 ///////////////////////////////Routes Especie/////////////////////////////////////////
 
 router.post('/createespecie', especieController.createEspecie)
@@ -83,7 +81,7 @@ router.delete('/deleteregion/:id_region', regionController.deleteRegion)
 router.get('/allnutrientes', typeNutrienteControllers.allnutrientes)
 router.get('/typenutriente/:id_tipo_nutriente', typeNutrienteControllers.viewTypeNutriente)
 router.put('/updatetypenutriente/:id_tipo_nutriente', typeNutrienteControllers.UpdateTypeNutriente)
-router.post('/createtypenutriente/:id_tipo_nutriente', typeNutrienteControllers.CreateTypeNutriente)
+router.post('/createtypenutriente', typeNutrienteControllers.CreateTypeNutriente)
 router.delete('/deletetypenutriente/:id_tipo_nutriente', typeNutrienteControllers.DeletetypeNutriente)
 
 
