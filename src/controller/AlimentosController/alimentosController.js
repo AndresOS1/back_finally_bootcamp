@@ -14,7 +14,7 @@ exports.allAliments = async (req, res) => {
   let estructuraapi = new estructuraApi();
 
   let alimentos = await Alimento.findAll({
-    include: [Region,TipoNutriente]
+    include: [Region, TipoNutriente]
   });
   if (alimentos.length > 0) {
     estructuraapi.setResultado(alimentos);

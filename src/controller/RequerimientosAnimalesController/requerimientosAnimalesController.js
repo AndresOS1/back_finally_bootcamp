@@ -1,5 +1,5 @@
 const estructuraApi = require("../../helpers/estructuraApi");
-const RequerimientosAnimales= require('../../models/RequerimientoAnimal/requerimientoAnimalModel')
+const RequerimientosAnimales = require('../../models/RequerimientoAnimal/requerimientoAnimalModel')
 
 var requestRequerimientoAnimales = require("../../models/DTO/requerimientos_animales");
 const { Pool } = require("pg");
@@ -7,12 +7,12 @@ const db = require("../../../env");
 
 const pool = new Pool(db);
 
-exports.allReqAliments = async (req, res) => {
+exports.allReqAnimal = async (req, res) => {
   let estructuraapi = new estructuraApi();
 
-  let reqAliments = await RequerimientosAnimales.findAll();
-  if (reqAliments.length > 0) {
-    estructuraapi.setResultado(reqAliments);
+  let reqAnimal = await RequerimientosAnimales.findAll();
+  if (reqAnimal.length > 0) {
+    estructuraapi.setResultado(reqAnimal);
   } else {
     estructuraapi.setEstado(404, "error", "No hay requeremientos de animales Resgistrados");
   }
@@ -21,34 +21,33 @@ exports.allReqAliments = async (req, res) => {
 
 
 
-exports.viewAliment = async (req, res) => {
+exports.viewReqAnimal = async (req, res) => {
   let estructuraapi = new estructuraApi();
-  const id_alimentos = req.params.id_alimentos;
-  const alimento = await Alimento.findOne({
-    where: { id_alimentos: id_alimentos },
+  const id_animal = req.params.id_animal;
+  const animal = await RequerimientosAnimales.findOne({
+    where: { id_requerimiento_animal: id_animal },
   });
-  if (alimento) {
-    estructuraapi.setResultado(alimento);
+  if (animal) {
+    estructuraapi.setResultado(animal);
   } else {
-    estructuraapi.setEstado(404, "error", "Alimento no encontrado");
+    estructuraapi.setEstado(404, "error", "Animal no encontrado");
   }
   res.json(estructuraapi.toResponse());
 };
 
-exports.createAliment = async (req, res) => {
+exports.createReqAnimal = async (req, res) => {
   let estructuraapi = new estructuraApi();
 
-  requestAlimentos = req.body;
-  console.log(requestAlimentos);
+  requestRequerimientoAnimales = req.body;
 
-  await Alimento.create(requestAlimentos)
+  await RequerimientosAnimales.create(requestRequerimientoAnimales)
     .then((succes) => {
       estructuraapi.setResultado(succes);
     })
     .catch((error) => {
       estructuraapi.setEstado(
         error.parent.code || error,
-        "Error al registrar el Alimento",
+        "Error al registrar el requerimiento Animal",
         error.parent.detail || error
       );
     });
@@ -56,44 +55,56 @@ exports.createAliment = async (req, res) => {
   res.json(estructuraapi.toResponse());
 };
 
-exports.updateAssignment = async (req, res) => {
+exports.updateReqAnimal = async (req, res) => {
   let estructuraapi = new estructuraApi();
-
-  const id_alimentos = req.params.id_alimentos;
-
-  requestAlimentos = req.body;
-
-  let alimento = await Alimento.findOne({
-    where: {
-      id_alimentos: id_alimentos,
-    },
+  const id_animal = req.params.id_animal;
+  requestRequerimientoAnimales = req.body;
+  let animal = await RequerimientosAnimales.findOne({
+    where: { id_requerimiento_animal: id_animal },
   });
-
-  if (alimento) {
-    let updateAliment = alimento.update(requestAlimentos);
-    if (!updateAliment) {
+  console.log(animal);
+  if (animal) {
+    let updateAnimal = animal.update(requestRequerimientoAnimales);
+    if (!updateAnimal) {
       estructuraapi.setEstado(204, "Error", "Error Inesperado");
     }
   } else {
-    estructuraapi.setEstado(204, "Not Found", "No existe este Alimento");
+    estructuraapi.setEstado(204, "Not Found", "No existe este requerimiento Animal");
   }
 
   res.json(estructuraapi.toResponse());
 };
 
-exports.deleteAssignment = async (req, res) => {
+exports.deleteRqAnimal = async (req, res) => {
   let estructuraapi = new estructuraApi();
 
-  const id_alimentos = req.params.id_alimentos;
+  const id_animal = req.params.id_animal;
 
-  const alimento = await Alimento.findOne({
-    where: { id_alimentos: id_alimentos },
+  const animal = await RequerimientosAnimales.findOne({
+    where: { id_requerimiento_animal: id_animal },
   });
 
-  if (alimento) {
-    alimento.destroy();
+  if (animal) {
+    animal.destroy();
   } else {
     api.setEstado("INFO", "info", `Alimento no Encontrado!`);
+  }
+  res.json(estructuraapi.toResponse());
+};
+exports.animalsForSpecies = async (req, res) => {
+  let estructuraapi = new estructuraApi();
+  const especie_id = req.params.especie_id;
+  const especieporreq = await pool.query(`SELECT 
+      *
+      FROM requerimientos_animales
+      JOIN especies
+      ON especies.id_especie = requerimientos_animales.especie_id
+      WHERE requerimientos_animales.especie_id = ${especie_id}`);
+  // console.log(asignaciones.rows);
+  if (especieporreq.rows.length > 0) {
+    estructuraapi.setResultado(especieporreq.rows);
+  } else {
+    estructuraapi.setEstado(404, "error", "No encontrado!");
   }
   res.json(estructuraapi.toResponse());
 };
