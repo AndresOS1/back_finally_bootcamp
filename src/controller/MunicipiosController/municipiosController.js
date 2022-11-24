@@ -8,7 +8,7 @@ exports.allMunicipio = async (req, res) => {
     if (municipio.length > 0) {
         api.setResultado(municipio)
     } else {
-        api.setEstado(404, "nutrientes entry", "list type nutriente empty")
+        api.setEstado(404, "municipio entry", "municpio list  empty")
     }
     res.json(api.toResponse())
 }
@@ -37,7 +37,7 @@ exports.UpdateMunicipio = async (request, response) => {
     if (update[0] > 0) {
         api.setResultado(municipio)
     } else {
-        api.setEstado(204, 'Empty', "id usuario no encontrado")
+        api.setEstado(204, 'Empty', " id_municipio no encontrado")
     }
 
     response.json(api.toResponse())
@@ -65,9 +65,9 @@ exports.DeleteMunicipio = async (request, response) => {
     await modelMunicipio.destroy({where:{id_municipio}})
         .then(succ => {
             if (succ != 0) {
-                api.setEstado('SUCC', 'success', `id_usuaio{${id_municipio}}:delete successfully`)
+                api.setEstado('SUCC', 'success', `id_municipio{${id_municipio}}:delete successfully`)
             } else {
-                api.setEstado('INFO', 'info', `id_usuaio{${id_municipio}}:!NO ENCONTRADO!`)
+                api.setEstado('INFO', 'info', `id_municipio{${id_municipio}}:!NO ENCONTRADO!`)
             }
         })
         .catch(err => {

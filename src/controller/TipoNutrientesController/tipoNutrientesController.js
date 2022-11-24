@@ -37,7 +37,7 @@ exports.UpdateTypeNutriente = async (request, response) => {
     if (update[0] > 0) {
         api.setResultado(nutiente)
     } else {
-        api.setEstado(204, 'Empty', "id usuario no encontrado")
+        api.setEstado(204, 'Empty', "id nutriente no encontrado")
     }
 
     response.json(api.toResponse())
@@ -65,9 +65,9 @@ exports.DeletetypeNutriente = async (request, response) => {
     await modelTipoNutriente.destroy({where:{id_tipo_nutriente}})
         .then(succ => {
             if (succ != 0) {
-                api.setEstado('SUCC', 'success', `id_usuaio{${id_tipo_nutriente}}:delete successfully`)
+                api.setEstado('SUCC', 'success', `id_tipo_nutriente{${id_tipo_nutriente}}:delete successfully`)
             } else {
-                api.setEstado('INFO', 'info', `id_usuaio{${id_tipo_nutriente}}:!NO ENCONTRADO!`)
+                api.setEstado('INFO', 'info', `id_tipo_nutriente{${id_tipo_nutriente}}:!NO ENCONTRADO!`)
             }
         })
         .catch(err => {
