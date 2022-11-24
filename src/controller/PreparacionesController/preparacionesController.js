@@ -92,7 +92,7 @@ exports.deletePreparacion = async (req, res) => {
   if (preparacion) {
     preparacion.destroy();
   } else {
-    api.setEstado("INFO", "info", `Preparacion no Encontrada!`);
+    estructuraapi.setEstado("INFO", "info", `Preparacion no Encontrada!`);
   }
   res.json(estructuraapi.toResponse());
 };

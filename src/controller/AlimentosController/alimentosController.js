@@ -112,7 +112,7 @@ exports.deleteAliment = async (req, res) => {
   if (alimento) {
     alimento.destroy();
   } else {
-    api.setEstado("INFO", "info", `Alimento no Encontrado!`);
+    estructuraapi.setEstado("INFO", "info", `Alimento no Encontrado!`);
   }
   res.json(estructuraapi.toResponse());
 };

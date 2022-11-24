@@ -87,7 +87,7 @@ exports.deleteRqAnimal = async (req, res) => {
   if (animal) {
     animal.destroy();
   } else {
-    api.setEstado("INFO", "info", `Alimento no Encontrado!`);
+    estructuraapi.setEstado("INFO", "info", `Alimento no Encontrado!`);
   }
   res.json(estructuraapi.toResponse());
 };

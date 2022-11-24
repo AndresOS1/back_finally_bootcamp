@@ -91,7 +91,7 @@ exports.deleteEspecie = async (req, res) => {
   if (especie) {
     especie.destroy();
   } else {
-    api.setEstado("INFO", "info", `Especie no Encontrada!`);
+    estructuraapi.setEstado("INFO", "info", `Especie no Encontrada!`);
   }
   res.json(estructuraapi.toResponse());
 };

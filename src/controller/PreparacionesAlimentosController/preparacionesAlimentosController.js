@@ -103,7 +103,7 @@ exports.deletePreparacionAlimentos = async (req, res) => {
   if (preparacionAlimento) {
     preparacionAlimento.destroy();
   } else {
-    api.setEstado("INFO", "info", `Preparacion de Alimentos no Encontrada!`);
+    estructuraapi.setEstado("INFO", "info", `Preparacion de Alimentos no Encontrada!`);
   }
   res.json(estructuraapi.toResponse());
 };

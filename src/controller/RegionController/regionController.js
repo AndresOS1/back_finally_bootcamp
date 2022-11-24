@@ -93,7 +93,7 @@ exports.deleteRegion = async (req, res) => {
   if (region) {
     region.destroy();
   } else {
-    api.setEstado("INFO", "info", `Region no Encontrada!`);
+    estructuraapi.setEstado("INFO", "info", `Region no Encontrada!`);
   }
   res.json(estructuraapi.toResponse());
 };
