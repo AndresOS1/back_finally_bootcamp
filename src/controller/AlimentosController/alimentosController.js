@@ -2,7 +2,7 @@ const estructuraApi = require("../../helpers/estructuraApi");
 const Alimento = require("../../models/Alimento/alimentoModel");
 const Region = require("../../models/Region/regionModel");
 const TipoNutriente = require("../../models/TipoNutriente/tipoNutrienteModel");
-const asociations = require("../../models/asociations")
+const asociations = require("../../models/asociations");
 
 var requestAlimentos = require("../../models/DTO/AlimentosRequest");
 const { Pool } = require("pg");
@@ -14,7 +14,7 @@ exports.allAliments = async (req, res) => {
   let estructuraapi = new estructuraApi();
 
   let alimentos = await Alimento.findAll({
-    include: [Region, TipoNutriente]
+    include: [Region, TipoNutriente],
   });
   if (alimentos.length > 0) {
     estructuraapi.setResultado(alimentos);
@@ -60,24 +60,22 @@ exports.createAliment = async (req, res) => {
   let estructuraapi = new estructuraApi();
 
   requestAlimentos = req.body;
-  console.log(requestAlimentos);
 
-  await Alimento.create(requestAlimentos)
-    .then((succes) => {
-      estructuraapi.setResultado(succes);
-    })
-    .catch((error) => {
-      estructuraapi.setEstado(
-        error.parent.code || error,
-        "Error al registrar el Alimento",
-        error.parent.detail || error
-      );
-    });
+  let newAlimento = await Alimento.create(requestAlimentos);
+  if (newAlimento) {
+    estructuraapi.setResultado(newAlimento);
+  } else {
+    estructuraapi.setEstado(
+      error.parent.code || 402,
+      "error",
+      "Error al registrar el Alimento"
+    );
+  }
 
   res.json(estructuraapi.toResponse());
 };
 
-exports.updateAssignment = async (req, res) => {
+exports.updateAliment = async (req, res) => {
   let estructuraapi = new estructuraApi();
 
   const id_alimentos = req.params.id_alimentos;
@@ -102,7 +100,7 @@ exports.updateAssignment = async (req, res) => {
   res.json(estructuraapi.toResponse());
 };
 
-exports.deleteAssignment = async (req, res) => {
+exports.deleteAliment = async (req, res) => {
   let estructuraapi = new estructuraApi();
 
   const id_alimentos = req.params.id_alimentos;
