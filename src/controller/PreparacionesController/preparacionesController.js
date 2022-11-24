@@ -1,6 +1,8 @@
 const estructuraApi = require("../../helpers/estructuraApi");
 const Preparacion = require("../../models/Preparacion/preparacionModel");
 const asociations = require("../../models/asociations");
+const modeluser = require("../../models/Usuario/UsuarioModel");
+const modelanimals = require("../../models/RequerimientoAnimal/requerimientoAnimalModel");
 
 var requestPreparacion = require("../../models/DTO/PreparacionDTO");
 const { Pool } = require("pg");
@@ -96,3 +98,19 @@ exports.deletePreparacion = async (req, res) => {
   }
   res.json(estructuraapi.toResponse());
 };
+
+exports.getPreparationByIdUser = async (req , res) => {
+  let api = new estructuraApi();
+
+  const {usuario_id} = req.params;
+
+  const preparacion = await Preparacion.findOne({include : [modelanimals , modeluser] },
+    {where: { usuario_id }});
+
+  if (preparacion) {
+    api.setResultado(preparacion)
+  } else {
+    api.setEstado("INFO", "info", `Preparacion no Encontrada!`);
+  }
+  res.json(api.toResponse());
+}

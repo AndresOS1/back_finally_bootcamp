@@ -44,8 +44,8 @@ exports.AlimentsForSite = async (req, res) => {
 
 exports.viewAliment = async (req, res) => {
   let estructuraapi = new estructuraApi();
-  const id_alimentos = req.params.id_alimentos;
-  const alimento = await Alimento.findOne({
+  const {id_alimentos} = req.params
+  const alimento = await Alimento.findOne({include :[Region , TipoNutriente]},{
     where: { id_alimentos: id_alimentos },
   });
   if (alimento) {
@@ -123,7 +123,7 @@ exports.AlimentosbyRegionAndNutriente = async (req, res) => {
 
   const {id_nutriente , id_region} = req.body;
 
-   const alimentos  = await Alimento.findAll()
+   const alimentos  = await Alimento.findAll({include : [Region,TipoNutriente] })
 
   const alimetosfiltrados = alimentos.filter(data => data.region_id == id_region && data.tipo_nutriente_id == id_nutriente )
 

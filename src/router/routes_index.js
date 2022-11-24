@@ -11,6 +11,7 @@ const regionController = require("../controller/RegionController/regionControlle
 const preparacionController = require("../controller/PreparacionesController/preparacionesController")
 const preparacioneAlimentoController = require("../controller/PreparacionesAlimentosController/preparacionesAlimentosController")
 
+
 ///////////////////////////////Routes Alimentos/////////////////////////////////////////
 router.get('/allaliments', alimentosController.allAliments)
 router.get('/onealiment/:id_alimentos', alimentosController.viewAliment)
@@ -30,6 +31,8 @@ router.put('/updatealiment/:id_alimentos', reqAnimalesController.updateReqAnimal
 router.delete('/deletealiment/:id_alimentos', reqAnimalesController.deleteRqAnimal)
 
 
+
+
 ///////////////////////////////Routes Especie/////////////////////////////////////////
 
 router.post('/createespecie', especieController.createEspecie)
@@ -44,6 +47,8 @@ router.delete('/deleteespecie/:id_especie', especieController.deleteEspecie)
 router.post('/createpreparacion', preparacionController.createPreparacion)
 router.get('/allpreparaciones', preparacionController.allPreparaciones)
 router.get('/onepreparacion/:id_preparacion', preparacionController.viewPreparacion)
+
+router.get('/preparacionbyuser/:usuario_id', preparacionController.getPreparationByIdUser)
 // router.put('/updatepreparacion/:id_preparacion', preparacionController.updatePreparacion)
 // router.delete('/deletepreparacion/:id_preparacion', preparacionController.updatePreparacion)
 
