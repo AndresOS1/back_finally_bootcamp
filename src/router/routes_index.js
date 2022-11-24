@@ -32,9 +32,9 @@ router.delete('/deletealiment/:id_alimentos', reqAnimalesController.deleteRqAnim
 
 router.post('/createespecie', especieController.createEspecie)
 router.get('/allespecies', especieController.allEspecies)
-router.get('/oneespecie/:id_animal', especieController.viewEspecie)
-router.put('/updateespecie/:id_animal', especieController.updateEspecie)
-router.delete('/deleteespecie/:id_animal', especieController.deleteEspecie)
+router.get('/oneespecie/:id_especie', especieController.viewEspecie)
+router.put('/updateespecie/:id_especie', especieController.updateEspecie)
+router.delete('/deleteespecie/:id_especie', especieController.deleteEspecie)
 
 
 ///////////////////////////////Routes Preparacion/////////////////////////////////////////
