@@ -104,7 +104,7 @@ exports.getPreparationByIdUser = async (req , res) => {
 
   const {usuario_id} = req.params;
 
-  const preparacion = await Preparacion.findOne({include : [modelanimals , modeluser] },
+  const preparacion = await Preparacion.findAll({include : [modelanimals , modeluser] },
     {where: { usuario_id }});
 
   if (preparacion) {
