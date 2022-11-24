@@ -3,13 +3,13 @@ const modelUser = require("../../models/Usuario/UsuarioModel");
 const jwt = require("../../controller/AutenticacionController/token");
 const estructuraApi = require("./../../helpers/estructuraApi");
 
-exports.LoginUser = async (request, response) => {
+exports.LoginUser = async (request , response) => {
   let estructuraapi = new estructuraApi();
   const { body } = request;
   const { identificacion, pasword } = body;
   //consult de user
   const user = await modelUser.findOne({
-    where: { identificacion: identificacion },
+    where: { identificacion },
   });
 
   const passwortCorrect = //use ternarias

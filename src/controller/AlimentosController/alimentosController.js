@@ -2,11 +2,11 @@ const estructuraApi = require("../../helpers/estructuraApi");
 const Alimento = require("../../models/Alimento/alimentoModel");
 const Region = require("../../models/Region/regionModel");
 const TipoNutriente = require("../../models/TipoNutriente/tipoNutrienteModel");
-const asociations = require("../../models/asociations");
 
 var requestAlimentos = require("../../models/DTO/AlimentosRequest");
 const { Pool } = require("pg");
 const db = require("../../../env");
+const { json } = require("sequelize");
 
 const pool = new Pool(db);
 
@@ -117,3 +117,21 @@ exports.deleteAliment = async (req, res) => {
   }
   res.json(estructuraapi.toResponse());
 };
+
+exports.AlimentosbyRegionAndNutriente = async (req, res) => {
+  const api = new estructuraApi
+
+  const {id_nutriente , id_region} = req.body;
+
+   const alimentos  = await Alimento.findAll()
+
+  const alimetosfiltrados = alimentos.filter(data => data.region_id == id_region && data.tipo_nutriente_id == id_nutriente )
+
+  alimetosfiltrados == null || alimetosfiltrados == ""  ?
+  api.setEstado(204, "empty" , "no se encuentran alimentos ") : 
+  api.setResultado(alimetosfiltrados)
+
+  res.json(api.toResponse())
+
+   
+}

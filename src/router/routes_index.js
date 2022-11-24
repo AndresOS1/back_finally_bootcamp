@@ -20,6 +20,8 @@ router.delete('/deletealiment/:id_alimentos', alimentosController.deleteAliment)
 router.get('/alimentsite/:region_id', alimentosController.AlimentsForSite)
 router.get('/alimentestatus/:especie_id', reqAnimalesController.animalsForSpecies)
 
+router.post('/alimentobyregionandnutriente' , alimentosController.AlimentosbyRegionAndNutriente)
+
 ///////////////////////////////Routes Requerimiento de Animales/////////////////////////////////////////
 router.get('/allreqanimals', reqAnimalesController.allReqAnimal)
 router.get('/onereqanimal/:id_alimentos', reqAnimalesController.viewReqAnimal)
