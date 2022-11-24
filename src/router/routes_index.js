@@ -22,11 +22,5 @@ router.get('/all_req_aliments', reqAnimalesController.allReqAliments)
 /////////////////////////////// Login /////////////////////////////////////////
 router.post('/login', loginController.LoginUser)
 
-router.get('/allmunicipio', municipiosController.allMunicipio)
-router.get('/viewmunicipio/:id_municipio', municipiosController.viewMunicipio)
-router.post('/updatemunicipio/:id_municipio', municipiosController.UpdateMunicipio)
-router.post('/createmunicipio', municipiosController.CreateMunicipio)
-router.delete('/deletemunicipio/:id_municipio', municipiosController.DeleteMunicipio)
-
 
 module.exports = router;
