@@ -18,7 +18,6 @@ router.get('/alimentsite/:region_id', alimentosController.AlimentsForSite)
 // router.get('/alimentestatus/:especie_id', listRequerimientoAcontroller.especieForEstado)
 
 ///////////////////////////////Routes Requerimiento de Animales/////////////////////////////////////////
-router.get('/all_req_aliments', reqAnimalesController.allReqAliments)
 
 
 
