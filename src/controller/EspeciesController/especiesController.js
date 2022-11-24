@@ -59,7 +59,7 @@ exports.updateEspecie = async (req, res) => {
 
   const id_especie = req.params.id_especie;
 
-  let especieBody = req.body.nombre_especie;
+  let especieBody = req.body;
 
   let especie = await Especie.findOne({
     where: {
