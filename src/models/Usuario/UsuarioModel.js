@@ -16,7 +16,6 @@ User.init(
     correo: DataTypes.STRING,
     celular: DataTypes.STRING,
     identificacion: DataTypes.STRING,
-    ubicacion: DataTypes.STRING,
     foto: DataTypes.STRING,
     tipo_usuario: DataTypes.STRING,
     region_id: DataTypes.STRING,

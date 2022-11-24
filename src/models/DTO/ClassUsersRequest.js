@@ -6,7 +6,6 @@ class RequestUsers {
     contrasena =  ''
     celular =  ''
     identificacion =  ''
-    ubicacion =  ''
     foto =  ''
     tipo_usuario =  ''
     region_id =  ''
