@@ -42,8 +42,8 @@ router.delete('/deleteespecie/:id_especie', especieController.deleteEspecie)
 router.post('/createpreparacion', preparacionController.createPreparacion)
 router.get('/allpreparaciones', preparacionController.allPreparaciones)
 router.get('/onepreparacion/:id_preparacion', preparacionController.viewPreparacion)
-router.put('/updatepreparacion/:id_preparacion', preparacionController.updatePreparacion)
-router.delete('/deletepreparacion/:id_preparacion', preparacionController.updatePreparacion)
+// router.put('/updatepreparacion/:id_preparacion', preparacionController.updatePreparacion)
+// router.delete('/deletepreparacion/:id_preparacion', preparacionController.updatePreparacion)
 
 
 ///////////////////////////////Routes Preparacion Alimento/////////////////////////////////////////
@@ -69,13 +69,13 @@ router.delete('/deleteUser/:id_usuario', usersControllers.DeleteUser)
 router.get('/allregiones', regionController.allRegiones)
 router.post('/createregion', regionController.createRegion)
 router.get('/viewregion/:id_region', regionController.viewRegion)
-router.put('/updateregion/:id_region', regionController.deleteRegion)
+router.put('/updateregion/:id_region', regionController.updateRegion)
 router.delete('/deleteregion/:id_region', regionController.deleteRegion)
 
 /////////////////////////////// Routes Tipo Nutrientes /////////////////////////////////////////
 router.get('/allnutrientes', typeNutrienteControllers.allnutrientes)
 router.get('/typenutriente/:id_tipo_nutriente', typeNutrienteControllers.viewTypeNutriente)
-router.post('/updatetypenutriente/:id_tipo_nutriente', typeNutrienteControllers.UpdateTypeNutriente)
+router.put('/updatetypenutriente/:id_tipo_nutriente', typeNutrienteControllers.UpdateTypeNutriente)
 router.post('/createtypenutriente/:id_tipo_nutriente', typeNutrienteControllers.CreateTypeNutriente)
 router.delete('/deletetypenutriente/:id_tipo_nutriente', typeNutrienteControllers.DeletetypeNutriente)
 
@@ -84,7 +84,7 @@ router.delete('/deletetypenutriente/:id_tipo_nutriente', typeNutrienteController
 
 router.get('/allmunicipio', municipiosController.allMunicipio)
 router.get('/viewmunicipio/:id_municipio', municipiosController.viewMunicipio)
-router.post('/updatemunicipio/:id_municipio', municipiosController.UpdateMunicipio)
+router.put('/updatemunicipio/:id_municipio', municipiosController.UpdateMunicipio)
 router.post('/createmunicipio', municipiosController.CreateMunicipio)
 router.delete('/deletemunicipio/:id_municipio', municipiosController.DeleteMunicipio)
 
