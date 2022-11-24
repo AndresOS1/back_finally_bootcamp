@@ -61,16 +61,17 @@ exports.createAliment = async (req, res) => {
 
   requestAlimentos = req.body;
 
-  let newAlimento = await Alimento.create(requestAlimentos);
-  if (newAlimento) {
-    estructuraapi.setResultado(newAlimento);
-  } else {
-    estructuraapi.setEstado(
-      error.parent.code || 402,
-      "error",
-      "Error al registrar el Alimento"
-    );
-  }
+  await Alimento.create(requestAlimentos)
+    .then((succes) => {
+      estructuraapi.setResultado(succes);
+    })
+    .catch((error) => {
+      estructuraapi.setEstado(
+        error.parent.code || error,
+        "Error al registrar el Alimento",
+        error.parent.detail || error
+      );
+    });
 
   res.json(estructuraapi.toResponse());
 };

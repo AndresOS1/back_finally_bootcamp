@@ -69,7 +69,7 @@ exports.updateEspecie = async (req, res) => {
 
   if (especie) {
     let updateEspecie = especie.update(especieBody);
-    if (!updateAliment) {
+    if (!updateEspecie) {
       estructuraapi.setEstado(204, "Error", "Error Inesperado");
     }
   } else {
