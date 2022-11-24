@@ -13,8 +13,6 @@ router.delete('/deletealiment/:id_alimentos', alimentosController.deleteAliment)
 router.get('/alimentsite/:region_id', alimentosController.AlimentsForSite)
 // router.get('/alimentestatus/:especie_id', listRequerimientoAcontroller.especieForEstado)
 
-
-
 ///////////////////////////////Routes Requerimiento de Animales/////////////////////////////////////////
 router.get('/all_req_aliments', reqAnimalesController.allReqAliments)
 
@@ -26,7 +24,6 @@ router.post('/createespecie', especieController.createEspecie)
 
 
 router.post('/login', loginController.LoginUser)
-
 
 
 module.exports = router;
