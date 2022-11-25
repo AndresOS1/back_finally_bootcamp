@@ -40,18 +40,13 @@ exports.createRegion = async (req, res) => {
   requestRegion = req.body;
   //   console.log(requestAlimentos);
 
-  let newRegion = await Region.create(requestRegion);
-
-  if (newRegion) {
-    estructuraapi.setResultado(newRegion);
-    // api.setEstado("success", "success", "se ")
-  } else {
-    estructuraapi.setEstado(
-      error.parent.code || 402,
-      "error",
-      "Error al registrar la Region"
-    );
-  }
+  await Region.create(requestRegion)
+    .then((succ) => {
+      estructuraapi.setResultado(succ);
+    })
+    .catch((err) => {
+      estructuraapi.setEstado(err.parent.code || err, "error", err.parent.detail || err);
+    });
 
   res.json(estructuraapi.toResponse());
 };

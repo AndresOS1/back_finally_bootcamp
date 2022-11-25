@@ -41,19 +41,17 @@ exports.createPreparacion = async (req, res) => {
 
   requestPreparacion = req.body;
 
-  let newPreparacion = await Preparacion.create(requestPreparacion);
-
-  if (newPreparacion) {
-    estructuraapi.setResultado(newPreparacion);
-    // api.setEstado("success", "success", "se ")
-  } else {
-    estructuraapi.setEstado(
-      error.parent.code || 402,
-      "error",
-      "Error al registrar la Preparacion"
-    );
-  }
-
+  await Preparacion.create(requestPreparacion)
+    .then((succ) => {
+      estructuraapi.setResultado(succ);
+    })
+    .catch((err) => {
+      estructuraapi.setEstado(
+        err.parent.code || err,
+        "error",
+        err.parent.detail || err
+      );
+    });
   res.json(estructuraapi.toResponse());
 };
 
@@ -99,18 +97,19 @@ exports.deletePreparacion = async (req, res) => {
   res.json(estructuraapi.toResponse());
 };
 
-exports.getPreparationByIdUser = async (req , res) => {
+exports.getPreparationByIdUser = async (req, res) => {
   let api = new estructuraApi();
 
-  const {usuario_id} = req.params;
+  const { usuario_id } = req.params;
 
-  const preparacion = await Preparacion.findAll({include : [modelanimals , modeluser] },
-    {where: { usuario_id }});
+  const preparacion = await Preparacion.findAll(
+    { where: { usuario_id: usuario_id }, include: [modelanimals, modeluser] }
+  );
 
   if (preparacion) {
-    api.setResultado(preparacion)
+    api.setResultado(preparacion);
   } else {
     api.setEstado("INFO", "info", `Preparacion no Encontrada!`);
   }
   res.json(api.toResponse());
-}
+};

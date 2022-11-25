@@ -47,19 +47,14 @@ exports.createPreparacionAlimentos = async (req, res) => {
 
   requestPreparacionAlimento = req.body;
 
-  let newPreparacionAlimentos = await PreparacionAlimento.create(
+  await PreparacionAlimento.create(
     requestPreparacionAlimento
-  );
-
-  if (newPreparacionAlimentos) {
-    estructuraapi.setResultado(newPreparacionAlimentos);
-  } else {
-    estructuraapi.setEstado(
-      error.parent.code || 402,
-      "error",
-      "Error al registrar la Preparacion de Alimento"
-    );
-  }
+  ).then((succ) => {
+    estructuraapi.setResultado(succ);
+  })
+  .catch((err) => {
+    estructuraapi.setEstado(err.parent.code || err, "error", err.parent.detail || err);
+  });
 
   res.json(estructuraapi.toResponse());
 };

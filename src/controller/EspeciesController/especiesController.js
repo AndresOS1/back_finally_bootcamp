@@ -38,18 +38,13 @@ exports.createEspecie = async (req, res) => {
 
   let especie = req.body;
 
-  const newEspecie = await Especie.create(especie);
-
-  if (newEspecie) {
-    estructuraapi.setResultado(newEspecie);
-    // api.setEstado("success", "success", "se ")
-  } else {
-    estructuraapi.setEstado(
-      error.parent.code || 402,
-      "error",
-      "Error al registrar la Especie"
-    );
-  }
+  await Especie.create(especie)
+    .then((succ) => {
+      estructuraapi.setResultado(succ);
+    })
+    .catch((err) => {
+      estructuraapi.setEstado(err.parent.code || err, "error", err.parent.detail || err);
+    });
 
   res.json(estructuraapi.toResponse());
 };
